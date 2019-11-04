@@ -1,4 +1,4 @@
-# Tenable.io -> Azure Security Command Center
+# Tenable.io -> Azure Security Center
 
 > *Please Note:*  This script leverages preview APIs for Azure.
 >               While this is expected in this case, this API may change
