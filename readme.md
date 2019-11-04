@@ -1,6 +1,6 @@
 # Tenable.io -> Azure Security Center
 
-> *Please Note:*  This script leverages preview APIs for Azure.
+> *Please Note:*  This script leverages preview APIs for Azure Security Center.
 >               While this is expected in this case, this API may change
 >               unexpectedly on the Microsoft side moving forward.  You have been warned.
 >               We will update this integration as MS updates and GAs their new API for ASC. 
