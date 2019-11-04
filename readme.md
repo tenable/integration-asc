@@ -1,6 +1,6 @@
 # Tenable.io -> Azure Security Command Center
 
-> Please Note:  This script currently leverages a non-production API for Azure.
+> *Please Note:*  This script currently leverages a non-production API for Azure.
 >               While this is expected in this case, this API may change
 >               unexpectedly on the Microsoft side.  You have been warned.
 
