@@ -5,8 +5,8 @@
 >               unexpectedly on the Microsoft side.  You have been warned.
 
 This tool is designed to consume Tenable.io vulnerability data,
-transform that data into the Google Security Command Center format, and then
-upload the resulting data into Google Security Command Center.
+transform that data into the Azure Security Center format, and then
+upload the resulting data into Azure Security Center.
 
 The tool can be run as either as a one-shot ingest or as a continuous service.
 
