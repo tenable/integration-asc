@@ -13,6 +13,7 @@ The tool can be run as either as a one-shot ingest or as a continuous service.
 
 ### Requirements for use
 
+* The Azure connector setup and working in your Tenable.io instance
 * A set of credentials for the script.  You will need to know the App Secret,
   App id, and Tenant id.  See the [Azure documentation][asc_keys] for
   instructions.
