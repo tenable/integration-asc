@@ -11,14 +11,14 @@ class AzureSecurityCenter(APISession):
     _auth_url = 'https://login.microsoftonline.com'
 
     def __init__(self, tenant_id, app_id, app_secret, **kw):
-        self._auth_url = kw.get('auth_url', self._auth_url)
+        self._auth_url = kw.pop('auth_url', self._auth_url)
         self._tenant_id = tenant_id
         self._app_id = app_id
         self._app_secret = app_secret
         super(AzureSecurityCenter, self).__init__(**kw)
 
-    def _build_session(self, session=None):
-        super(AzureSecurityCenter, self)._build_session(session)
+    def _build_session(self, **kwargs):
+        super(AzureSecurityCenter, self)._build_session(**kwargs)
 
         # Retreive the access token using the adal library.
         self._ctx = adal.AuthenticationContext('{}/{}'.format(
