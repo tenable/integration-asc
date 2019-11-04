@@ -23,7 +23,7 @@ The tool can be run as either as a one-shot ingest or as a continuous service.
 
 ### Installing
 ```shell
-pip install tenable-cscc
+pip install .
 ```
 
 ### Options
