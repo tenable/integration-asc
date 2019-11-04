@@ -1,8 +1,9 @@
 # Tenable.io -> Azure Security Command Center
 
-> *Please Note:*  This script currently leverages a non-production API for Azure.
+> *Please Note:*  This script leverages preview APIs for Azure.
 >               While this is expected in this case, this API may change
->               unexpectedly on the Microsoft side.  You have been warned.
+>               unexpectedly on the Microsoft side moving forward.  You have been warned.
+>               We will update this integration as MS updates and GAs their new API for ASC. 
 
 This tool is designed to consume Tenable.io vulnerability data,
 transform that data into the Azure Security Center format, and then
