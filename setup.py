@@ -8,7 +8,7 @@ https://github.com/tenable/integrations-microsoft-asc
 '''
 
 setup(
-    name='tenable-bigfix',
+    name='tenable-microsoft-asc',
     version='1.0.0',
     description='',
     author='Tenable, Inc.',
