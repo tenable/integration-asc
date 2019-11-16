@@ -1,34 +1,33 @@
-# Tenable.io -> Azure Security Center
+# Tenable.io for Azure Security Center
 
 > *Please Note:*  This script leverages preview APIs for Azure Security Center.
 >               While this is expected in this case, this API may change
 >               unexpectedly on the Microsoft side moving forward.  You have been warned.
 >               We will update this integration as MS updates and GAs their new API for ASC. 
 
-This tool is designed to consume Tenable.io vulnerability data,
-transform that data into the Azure Security Center format, and then
-upload the resulting data into Azure Security Center.
+This integration is designed to pull Tenable.io for vulnerabilities on Azure assets and summarize (count) them by severity.
+Once the vulnerabilities are summarized for each Azure asset it creates a Azure Security Center recommendation for each host with a summary of the number of vulnerabilities on that host by severity.
 
-The tool can be run as either as a one-shot ingest or as a continuous service.
+This integration can be run as a one-shot ingest or as a continuous service.
 
-### Requirements for use
+## Requirements
 
-* The Azure connector setup and working in your Tenable.io instance
-* A set of credentials for the script.  You will need to know the App Secret,
+* The Tenable.io Azure connector must be setup and working correctly in your Tenable.io instance
+* A set of Azure credentials for the integration to use.  You will need to know the App Secret,
   App id, and Tenant id.  See the [Azure documentation][asc_keys] for
   instructions.
-* A set of admin API keys for Tenable.io.  [See the Instructions][tio_keys] on
-  Tenable's documenation for more information.
-* A host to run the script on.  This can be located anywhere as the script links
+* A set of Tenable.io API keys with the Administrator role.  [See the Instructions][tio_keys] on
+  Tenable's documentation for more information.
+* A host to run the script on.  This can be located anywhere as the integrations is linking
   cloud-to-cloud.
 
 
-### Installing
+## Setup
 ```shell
 pip install .
 ```
 
-### Options
+## Options
 The following below details both the command-line arguments as well as the
 equivalent environment variables.
 
@@ -51,7 +50,7 @@ Options:
   --help                    Show this message and exit.
 ```
 
-### Usage
+## Example Usage
 
 Run the import once:
 
@@ -76,7 +75,7 @@ tenable-asc                                     \
     --run-every 1
 ```
 
-### Changelog
+## Changelog
 [Visit the CHANGELOG](CHANGELOG.md)
 
 [tio_keys]: https://docs.tenable.com/cloud/Content/Settings/GenerateAPIKey.htm
