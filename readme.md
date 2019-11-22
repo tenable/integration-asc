@@ -1,23 +1,22 @@
 # Tenable.io for Azure Security Center
 
-> *Please Note:*  This script leverages preview APIs for Azure Security Center.
->               While this is expected in this case, this API may change
->               unexpectedly on the Microsoft side moving forward.  You have been warned.
->               We will update this integration as MS updates and GAs their new API for ASC. 
+> *Please Note:*  This script leverages preview APIs for Azure Security Center (ASC).
+>               While this is expected, the API may change
+>               unexpectedly on the Microsoft side.  However, we plan to update
+>               this integration as Microsoft updates their APIs for ASC. 
 
-This integration is designed to pull Tenable.io for vulnerabilities on Azure assets and summarize (count) them by severity.
-Once the vulnerabilities are summarized for each Azure asset it creates a Azure Security Center recommendation for each host with a summary of the number of vulnerabilities on that host by severity.
+This integration is designed to pull Tenable.io vulnerabilities from Azure assets and summarize (count) them by severity. Once the vulnerabilities are summarized for each Azure asset, the integration creates an Azure Security Center recommendation for each host.   The recommendation includes a summary of the number of vulnerabilities on each host and lists them by severity.
 
-This integration can be run as a one-shot ingest or as a continuous service.
+This integration can be run as a one-shot ingest or continuous service.
+
 
 ## Requirements
 
-* The Tenable.io Azure connector must be setup and working correctly in your Tenable.io instance
+* A working Azure connector in your Tenable.io instance
 * A set of Azure credentials for the integration to use.  You will need to know the App Secret,
-  App id, and Tenant id.  See the [Azure documentation][asc_keys] for
+  App ID, and Tenant ID.  See the [Azure documentation][asc_keys] for
   instructions.
-* A set of Tenable.io API keys with the Administrator role.  [See the Instructions][tio_keys] on
-  Tenable's documentation for more information.
+* A set of Tenable.io API keys with the Administrator role.  [See the Tenable.io Generate API Key Instructions][tio_keys] for more information.
 * A host to run the script on.  This can be located anywhere as the integrations is linking
   cloud-to-cloud.
 
@@ -28,8 +27,7 @@ pip install .
 ```
 
 ## Options
-The following below details both the command-line arguments as well as the
-equivalent environment variables.
+The following script details, both, command-line arguments and equivalent environment variables.
 
 ```
 Usage: tenable-asc [OPTIONS]
