@@ -1,4 +1,5 @@
 import arrow, time, logging, json
+from restfly.errors import NotFoundError
 
 class Tio2ASC:
     _cache = dict()
@@ -77,19 +78,23 @@ class Tio2ASC:
                 self._log.debug('Azure Responded with: ' + json.dumps(resp))
 
             # Generate the finding in Azure Security Center.
-            resp = self.asc.assessments.create_assessment_finding(
-                asset['resource'],
-                atype,
-                status,
-                low=asset['low'],
-                medium=asset['medium'],
-                high=asset['high'],
-                critical=asset['critical'],
-                link=''.join([
-                    'https://cloud.tenable.com/tio/app.html#',
-                    '/vulnerability-management/assets/asset-details',
-                    '/{}/overview'.format(asset_uuid)
-                ]))
+            try:
+                resp = self.asc.assessments.create_assessment_finding(
+                    asset['resource'],
+                    atype,
+                    status,
+                    low=asset['low'],
+                    medium=asset['medium'],
+                    high=asset['high'],
+                    critical=asset['critical'],
+                    link=''.join([
+                        'https://cloud.tenable.com/tio/app.html#',
+                        '/vulnerability-management/assets/asset-details',
+                        '/{}/overview'.format(asset_uuid)
+                    ]))
+            except NotFoundError:
+                self._log.warning('Asset no longer exists {}'.format(
+                    asset['resource']))
             self._log.debug('Azure Responded with: ' + json.dumps(resp))
 
     def ingest(self, age=None, batch_size=1000, unhealthy_thresh='medium'):
