@@ -9,7 +9,7 @@ https://github.com/tenable/integrations-microsoft-asc
 
 setup(
     name='tenable-microsoft-asc',
-    version='1.0.0',
+    version='1.0.1',
     description='',
     author='Tenable, Inc.',
     long_description=long_description,
