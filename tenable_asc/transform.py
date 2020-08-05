@@ -1,5 +1,5 @@
 import arrow, time, logging, json
-from restfly.errors import NotFoundError
+from restfly.errors import NotFoundError, ForbiddenError
 
 class Tio2ASC:
     _cache = dict()
@@ -95,7 +95,11 @@ class Tio2ASC:
             except NotFoundError:
                 self._log.warning('Asset no longer exists {}'.format(
                     asset['resource']))
-            self._log.debug('Azure Responded with: ' + json.dumps(resp))
+            except ForbiddenError:
+                self._log.warning('Not authorized to submit resource {}'.format(
+                    asset['resource']))
+            else:
+                self._log.debug('Azure Responded with: ' + json.dumps(resp))
 
     def ingest(self, age=None, batch_size=1000, unhealthy_thresh='medium'):
         '''
