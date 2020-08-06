@@ -38,8 +38,6 @@ from . import __version__
     type=click.INT, help='Export/Import Batch Sizing')
 @click.option('--verbose', '-v', envvar='VERBOSITY', default=0,
     count=True, help='Logging Verbosity')
-#@click.option('--observed-since', '-s', envvar='SINCE', default=0,
-#    type=click.INT, help='The unix timestamp of the age threshold')
 @click.option('--run-every', '-r', envvar='RUN_EVERY',
     type=click.INT, help='How many hours between recurring imports')
 @click.option('--auth-uri', envvar='AZURE_AUTH_URI',
@@ -54,9 +52,11 @@ from . import __version__
     help='Azure Security Center tenant id')
 @click.option('--azure-app-secret', envvar='AZURE_APP_SECRET',
     help='Azure Security Center application secret')
+@click.option('--subscription', '-s', multiple=True,
+    help='Only upload this subscription to Azure')
 def cli(tio_access_key, tio_secret_key, batch_size, verbose,
         run_every, auth_uri, azure_uri, azure_app_id,
-        azure_tenant_id, azure_app_secret):
+        azure_tenant_id, azure_app_secret, subscription):
     '''
     Tenable.io -> Azure Security Center Transformer & Ingester
     '''
@@ -81,7 +81,7 @@ def cli(tio_access_key, tio_secret_key, batch_size, verbose,
         auth_url=auth_uri,
         url=azure_uri
     )
-    ingest = Tio2ASC(tio, asc)
+    ingest = Tio2ASC(tio, asc, allowed_subs=subscription)
     ingest.ingest(batch_size)
 
     # If we are expected to continually re-run the transformer, then we will

@@ -6,11 +6,12 @@ class Tio2ASC:
     _psubs = list()
     allowed_subs = None
 
-    def __init__(self, tio, asc):
+    def __init__(self, tio, asc, allowed_subs=None):
         self._log = logging.getLogger('{}.{}'.format(
             self.__module__, self.__class__.__name__))
         self.tio = tio
         self.asc = asc
+        self.allowed_subs = allowed_subs
 
     def _cache_asset(self, asset):
         '''
@@ -65,15 +66,20 @@ class Tio2ASC:
             # If the subscription hasn't yet received the assessment type, then
             # we will need to create it.
             if not asset['subscription'] in self._psubs:
-                resp = self.asc.assessments.create_type(asset['subscription'], atype,
-                    displayName='Tenable.io Assessment',
-                    assessmentType='Custom',
-                    description='Vulnerabilities were discovered on the resource.',
-                    remediationDescription='Refer to details within Tenable.io for more information',
-                    categories=['Compute',],
-                    secureScoreWeight=50,
-                    preview=True,
-                )
+                try:
+                    resp = self.asc.assessments.create_type(asset['subscription'], atype,
+                        displayName='Tenable.io Assessment',
+                        assessmentType='Custom',
+                        description='Vulnerabilities were discovered on the resource.',
+                        remediationDescription='Refer to details within Tenable.io for more information',
+                        categories=['Compute',],
+                        secureScoreWeight=50,
+                        preview=True,
+                    )
+                except ForbiddenError:
+                    self._log.warning('Not authorized to create type {} in {}'.format(
+                        atype, asset['subscription']))
+                    return
                 self._psubs.append(asset['subscription'])
                 self._log.debug('Azure Responded with: ' + json.dumps(resp))
 
